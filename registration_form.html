@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registration Form</h2>
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name">
+        <span class="error" id="nameError"></span>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email">
+        <span class="error" id="emailError"></span>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}">
+        <span class="error" id="phoneError"></span>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob">
+        <span class="error" id="dobError"></span>
+
+        <label for="branch">Branch:</label>
+        <select id="branch" name="branch">
+            <option value="">Select Branch</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Electrical Engineering">Electrical Engineering</option>
+            <option value="Mechanical Engineering">Mechanical Engineering</option>
+            <option value="Civil Engineering">Civil Engineering</option>
+        </select>
+        <span class="error" id="branchError"></span>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        <span class="error" id="genderError"></span>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password">
+        <span class="error" id="passwordError"></span>
+
+        <input type="submit" value="Register">
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        let valid = true;
+
+        // Reset error messages
+        document.getElementById("nameError").textContent = "";
+        document.getElementById("emailError").textContent = "";
+        document.getElementById("phoneError").textContent = "";
+        document.getElementById("dobError").textContent = "";
+        document.getElementById("branchError").textContent = "";
+        document.getElementById("genderError").textContent = "";
+        document.getElementById("passwordError").textContent = "";
+
+        // Name validation
+        const name = document.getElementById("name").value;
+        if (name.trim() === "") {
+            document.getElementById("nameError").textContent = "Name is required.";
+            valid = false;
+        }
+
+        // Email validation
+        const email = document.getElementById("email").value;
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+            document.getElementById("emailError").textContent = "Please enter a valid email address.";
+            valid = false;
+        }
+
+        // Phone validation
+        const phone = document.getElementById("phone").value;
+        const phonePattern = /^[0-9]{10}$/;
+        if (!phonePattern.test(phone)) {
+            document.getElementById("phoneError").textContent = "Please enter a valid phone number (10 digits).";
+            valid = false;
+        }
+
+        // Date of Birth validation
+        const dob = document.getElementById("dob").value;
+        if (!dob) {
+            document.getElementById("dobError").textContent = "Date of birth is required.";
+            valid = false;
+        }
+
+        // Branch validation
+        const branch = document.getElementById("branch").value;
+        if (!branch) {
+            document.getElementById("branchError").textContent = "Please select a branch.";
+            valid = false;
+        }
+
+        // Gender validation
+        const gender = document.getElementById("gender").value;
+        if (!gender) {
+            document.getElementById("genderError").textContent = "Please select your gender.";
+            valid = false;
+        }
+
+        // Password validation
+        const password = document.getElementById("password").value;
+        if (password.length < 6) {
+            document.getElementById("passwordError").textContent = "Password must be at least 6 characters long.";
+            valid = false;
+        }
+
+        return valid;
+    }
+</script>
+
+</body>
+</html>
